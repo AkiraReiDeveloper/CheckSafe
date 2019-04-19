@@ -4,4 +4,14 @@
     <string name="btnUsers">Usuarios</string>
     <string name="imgLogo">LOGO</string>
     <string name="txtCredits">Desarrollado por AkiraReiDeveloper</string>
+    <string name="btnRegistrarUser">Registrar</string>
+    <string name="labSexo">Sexo:</string>
+    <string name="txtApellidos">Apellidos</string>
+    <string name="txtNombres">Nombres</string>
+    <string name="txtGrupo">Grupo</string>
+    <string name="txtGrado">Grado</string>
+    <string name="txtEmail">Correo Electronico</string>
+    <string name="radFemenino">Femenino</string>
+    <string name="radMasculino">Masculino</string>
+    <string name="labTitleRegistrar">Registrar Nuevo Usuario</string>
 </resources>

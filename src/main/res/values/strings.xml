@@ -3,4 +3,5 @@
     <string name="btnScanner">Escanear</string>
     <string name="btnUsers">Usuarios</string>
     <string name="imgLogo">LOGO</string>
+    <string name="txtCredits">Desarrollado por AkiraReiDeveloper</string>
 </resources>

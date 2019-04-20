@@ -14,4 +14,9 @@
     <string name="radFemenino">Femenino</string>
     <string name="radMasculino">Masculino</string>
     <string name="labTitleRegistrar">Registrar Nuevo Usuario</string>
+    <string name="btnAgregar">Agregar</string>
+    <string name="btnConsultar">Consultar</string>
+    <string name="btnListar">Listar</string>
+    <string name="btnEliminar">Eliminar</string>
+    <string name="labUsuario">Usuario</string>
 </resources>

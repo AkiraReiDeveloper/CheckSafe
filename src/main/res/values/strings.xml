@@ -19,4 +19,5 @@
     <string name="btnListar">Listar</string>
     <string name="btnEliminar">Eliminar</string>
     <string name="labUsuario">Usuario</string>
+    <string name="txtNoCuenta">No. Cuenta</string>
 </resources>

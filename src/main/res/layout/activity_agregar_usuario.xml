@@ -16,6 +16,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/botonripple"
+        android:onClick="onClick"
         android:text="@string/btnRegistrarUser"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/txtApellido"
         android:layout_width="217dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -56,19 +57,18 @@
         android:inputType="textPersonName"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editText4"
+        app:layout_constraintBottom_toTopOf="@+id/txtEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/txtNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
@@ -76,20 +76,43 @@
         android:backgroundTint="@color/colorPrimary"
         android:ems="10"
         android:hint="@string/txtNombres"
-        android:textColorHint="@color/colorWhiteTr"
         android:inputType="textPersonName"
         android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhiteTr"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/txtApellido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/txtNoCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/txtNoCuenta"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhiteTr"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtNombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.983"
         tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/txtGrupo"
         android:layout_width="102dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="90dp"
@@ -105,11 +128,11 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText3"
+        app:layout_constraintStart_toEndOf="@+id/txtGrado"
         tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/txtGrado"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
@@ -125,13 +148,13 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhiteTr"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintEnd_toStartOf="@+id/txtGrupo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
         tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -147,7 +170,7 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/txtGrupo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +195,7 @@
         app:layout_constraintVertical_bias="0.217">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radFemenino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -181,12 +204,12 @@
             android:text="@string/radFemenino"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/radioButton2"
+            app:layout_constraintEnd_toStartOf="@+id/radMasculino"
             tools:layout_editor_absoluteY="371dp"
             tools:targetApi="o" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radMasculino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorPrimary"
@@ -214,6 +237,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/txtGrado" />
 
 </android.support.constraint.ConstraintLayout>

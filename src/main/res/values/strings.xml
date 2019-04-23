@@ -20,4 +20,6 @@
     <string name="btnEliminar">Eliminar</string>
     <string name="labUsuario">Usuario</string>
     <string name="txtNoCuenta">No. Cuenta</string>
+    <string name="labTitleConsultar">Consultar Usuario</string>
+    <string name="btnConsultarUser">Consultar</string>
 </resources>

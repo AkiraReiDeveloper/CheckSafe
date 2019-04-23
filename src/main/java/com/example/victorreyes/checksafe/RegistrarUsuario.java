@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -21,6 +22,8 @@ import org.json.JSONObject;
 public class RegistrarUsuario extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     EditText campoId, campoNombre, campoApellido, campoEmail, campoGrado, campoGrupo;
+    RadioButton campoFemenino, campoMasculino;
+    String sexo = "";
     //Button RegistButton;
 
     RequestQueue request;
@@ -41,18 +44,30 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
         campoEmail = (EditText) findViewById(R.id.txtEmail);
         campoGrado = (EditText) findViewById(R.id.txtGrado);
         campoGrupo = (EditText) findViewById(R.id.txtGrupo);
+        campoFemenino = (RadioButton) findViewById(R.id.radFemenino);
+        campoMasculino = (RadioButton) findViewById(R.id.radMasculino);
+
     }
 
     public void onClick(View view){
 
         cargarWebSevice();
+        if(campoFemenino.isChecked()){
+
+            sexo = "Femenino";
+        }else {
+            if(campoMasculino.isChecked()){
+
+                sexo = "Masculino";
+            }
+        }
     }
 
     private void cargarWebSevice() {
 
 
 
-        String url = "http://192.168.8.101/DataBase_CheckSafe/CheckSafe_DB.php?NoCuenta=" + campoId.getText().toString() + "&Nombre=" + campoNombre.getText().toString() + "&Apellido=" + campoApellido.getText().toString() + "&Email=" + campoEmail.getText().toString() + "&Grado=" + campoGrado.getText().toString() + "&Grupo=" + campoGrupo.getText().toString();
+        String url = "http://192.168.8.101/DataBase_CheckSafe/CheckSafe_DB.php?NoCuenta=" + campoId.getText().toString() + "&Nombre=" + campoNombre.getText().toString() + "&Apellido=" + campoApellido.getText().toString() + "&Email=" + campoEmail.getText().toString() + "&Grado=" + campoGrado.getText().toString() + "&Grupo=" + campoGrupo.getText().toString() + "&Sexo=" + sexo;
         //url = url.replace(" ", "%20");
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,this,this);

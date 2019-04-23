@@ -126,7 +126,7 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhiteTr"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupSexo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtGrado"
         tools:targetApi="o" />
@@ -177,7 +177,7 @@
         tools:targetApi="o" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radioGroupSexo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

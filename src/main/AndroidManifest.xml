@@ -34,6 +34,11 @@
             android:name=".Scanner"
             android:screenOrientation="portrait">
         </activity>
+
+        <activity
+            android:name=".ConsultarUsuario"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

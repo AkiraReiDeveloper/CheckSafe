@@ -22,4 +22,7 @@
     <string name="txtNoCuenta">No. Cuenta</string>
     <string name="labTitleConsultar">Consultar Usuario</string>
     <string name="btnConsultarUser">Consultar</string>
+    <string name="textSexoL">Sexo</string>
+    <string name="textSexoU">Sexo</string>
+    <string name="separador">_______________________________________________________________________________</string>
 </resources>

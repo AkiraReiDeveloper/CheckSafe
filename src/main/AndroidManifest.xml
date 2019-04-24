@@ -39,6 +39,11 @@
             android:name=".ConsultarUsuario"
             android:screenOrientation="portrait">
         </activity>
+
+        <activity
+            android:name=".ListarUsuarios"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

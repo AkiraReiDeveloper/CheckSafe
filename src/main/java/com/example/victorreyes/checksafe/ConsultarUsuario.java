@@ -43,6 +43,7 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
         txtVEmail = (TextView) findViewById(R.id.textEmail);
         txtVGrado = (TextView) findViewById(R.id.textGrado);
         txtVGrupo = (TextView) findViewById(R.id.textGrupo);
+        txtVSexo = (TextView) findViewById(R.id.textSexo);
     }
 
     public void onClick(View view){
@@ -83,7 +84,7 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
             miUsuario.setEmail(jsonObject.optString("Email"));
             miUsuario.setGrado(jsonObject.optInt("Grado"));
             miUsuario.setGrupo(jsonObject.optString("Grupo"));
-            //miUsuario.setSexo(jsonObject.optString("Sexo"));
+            miUsuario.setSexo(jsonObject.optString("Sexo"));
 
         }catch (JSONException e){
 
@@ -95,7 +96,7 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
         txtVEmail.setText("Email: " + miUsuario.getEmail());
         txtVGrado.setText("Grado: " + miUsuario.getGrado());
         txtVGrupo.setText("Grupo: " + miUsuario.getGrupo());
-        //txtVSexo.setText(miUsuario.getSexo());*/
+        txtVSexo.setText("Sexo: " + miUsuario.getSexo());
 
     }
 }

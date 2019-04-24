@@ -27,7 +27,7 @@ public class UsuariosCRUD extends AppCompatActivity {
                 miIntent = new Intent(UsuariosCRUD.this, ConsultarUsuario.class);
                 break;
             case R.id.btnListar:
-
+                miIntent = new Intent(UsuariosCRUD.this, ListarUsuarios.class);
                 break;
             case R.id.btnEliminar:
 

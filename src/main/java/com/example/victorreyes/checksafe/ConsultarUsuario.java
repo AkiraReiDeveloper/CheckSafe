@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
 
     EditText campoId;
     TextView txtVNombre, txtVApellido, txtVEmail, txtVGrado, txtVGrupo, txtVSexo;
+    ImageView campoImagen;
     //Button RegistButton;
 
     RequestQueue request;
@@ -44,6 +46,7 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
         txtVGrado = (TextView) findViewById(R.id.textGrado);
         txtVGrupo = (TextView) findViewById(R.id.textGrupo);
         txtVSexo = (TextView) findViewById(R.id.textSexo);
+        campoImagen = (ImageView) findViewById(R.id.imgConsultarUsuarios);
     }
 
     public void onClick(View view){
@@ -85,6 +88,7 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
             miUsuario.setGrado(jsonObject.optInt("Grado"));
             miUsuario.setGrupo(jsonObject.optString("Grupo"));
             miUsuario.setSexo(jsonObject.optString("Sexo"));
+            miUsuario.setDato(jsonObject.optString("Foto"));
 
         }catch (JSONException e){
 
@@ -97,6 +101,14 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
         txtVGrado.setText("Grado: " + miUsuario.getGrado());
         txtVGrupo.setText("Grupo: " + miUsuario.getGrupo());
         txtVSexo.setText("Sexo: " + miUsuario.getSexo());
+        if(miUsuario.getImagen()!=null){
+
+            campoImagen.setImageBitmap(miUsuario.getImagen());
+        }else {
+
+            campoImagen.setImageResource(R.drawable.img_base);
+        }
+
 
     }
 }

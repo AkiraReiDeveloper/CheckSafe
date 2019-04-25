@@ -95,6 +95,7 @@ public class ListarUsuarios extends AppCompatActivity implements Response.Listen
                 usuario.setGrado(jsonObject.optInt("Grado"));
                 usuario.setGrupo(jsonObject.optString("Grupo"));
                 usuario.setSexo(jsonObject.optString("Sexo"));
+                usuario.setDato(jsonObject.optString("Foto"));
                 listaUsuarios.add(usuario);
             }
             //progress.hide();

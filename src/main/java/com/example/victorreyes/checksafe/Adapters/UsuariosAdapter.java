@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.victorreyes.checksafe.Entidades.Usuario;
@@ -40,7 +41,13 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Usuari
         holder.textGrado.setText(listaUsuarios.get(position).getGrado().toString());
         holder.textGrupo.setText(listaUsuarios.get(position).getGrupo().toString());
         holder.textSexo.setText(listaUsuarios.get(position).getSexo().toString());
+        if (listaUsuarios.get(position).getImagen()!=null){
 
+            holder.imgView.setImageBitmap(listaUsuarios.get(position).getImagen());
+        }else {
+
+            holder.imgView.setImageResource(R.drawable.img_base);
+        }
     }
 
     @Override
@@ -51,6 +58,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Usuari
     public class  UsuariosHolder extends RecyclerView.ViewHolder{
 
         TextView textNoCuenta, textNombre, textApellidos, textEmail, textGrado, textGrupo, textSexo;
+        ImageView imgView;
 
         public UsuariosHolder(View itemView){
             super(itemView);
@@ -61,6 +69,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Usuari
             textGrado = itemView.findViewById(R.id.textGradoU);
             textGrupo = itemView.findViewById(R.id.textGrupoU);
             textSexo = itemView.findViewById(R.id.textSexoU);
+            imgView = itemView.findViewById(R.id.imgConsultarListaUsuarios);
         }
     }
 }

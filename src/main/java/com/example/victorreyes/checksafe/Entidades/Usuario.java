@@ -1,5 +1,9 @@
 package com.example.victorreyes.checksafe.Entidades;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 public class Usuario {
 
     private Integer id;
@@ -10,7 +14,10 @@ public class Usuario {
     private String grupo;
     private String sexo;
 
-    public Usuario( Integer id, String nombre, String apellido, String email, Integer grado, String grupo, String sexo ){
+    private String dato;
+    private Bitmap imagen;
+
+    public Usuario( Integer id, String nombre, String apellido, String email, Integer grado, String grupo, String sexo, Bitmap imagen ){
 
         this.id = id;
         this.nombre = nombre;
@@ -19,11 +26,36 @@ public class Usuario {
         this.grado = grado;
         this.grupo = grupo;
         this.sexo = sexo;
+        this.imagen = imagen;
 
     }
 
     public Usuario(){
 
+    }
+    public String getDato() {
+        return dato;
+    }
+
+    public void setDato(String dato) {
+        this.dato = dato;
+
+        try{
+            byte[] byteCode = Base64.decode(dato, Base64.DEFAULT);
+            this.imagen = BitmapFactory.decodeByteArray(byteCode, 0, byteCode.length);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
+    public Bitmap getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Bitmap imagen) {
+        this.imagen = imagen;
     }
 
     public Integer getId() {

@@ -12,7 +12,7 @@
         android:layout_height="46dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
@@ -25,8 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toEndOf="@+id/txtNoCuentaConsulta"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/imgConsultarUsuarios"
         tools:text="Consultar" />
 
     <EditText
@@ -35,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:autofillHints=""
         android:backgroundTint="@color/colorPrimary"
@@ -47,8 +46,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textNombre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/imgConsultarUsuarios"
         tools:targetApi="o" />
 
     <TextView
@@ -122,11 +120,12 @@
         android:layout_marginLeft="25dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="196dp"
+        android:layout_marginBottom="40dp"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -160,4 +159,19 @@
         app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toEndOf="@+id/textGrado"
         app:layout_constraintTop_toBottomOf="@+id/textEmail" />
+
+    <ImageView
+        android:id="@+id/imgConsultarUsuarios"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:srcCompat="@drawable/img_base"
+        android:contentDescription="@string/imgConsultarUsuarios" />
 </android.support.constraint.ConstraintLayout>

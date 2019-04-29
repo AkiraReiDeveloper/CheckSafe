@@ -36,7 +36,7 @@ public class GenerarQR {
     private String NameOfFolder = "";
     private Context TheThis;
 
-    public void saveImage(Bitmap ImageToSave, Context context, String noCuenta, String nombre, String grupo, String grado) {
+    public void saveImage(Bitmap ImageToSave, Context context, String noCuenta, String nombre, String Correo, String grupo, String grado) {
 
         this.TheThis = context;
         NameOfFolder = "/Gastronomia " + "Salon: " + grupo + "-" + grado;
@@ -48,18 +48,20 @@ public class GenerarQR {
             dir.mkdirs();
         }
         //nombre de la imagen
-        NameOfFile = noCuenta + "_" + nombre + "_" + grupo + "_" + grado + "_";
+        NameOfFile = noCuenta + "_" + nombre + "_" + grupo + "_" + grado + "_" + CurrentDateAndTime;
 
-        File file = new File(dir, NameOfFile + CurrentDateAndTime + ".png");
+        File file = new File(dir, NameOfFile + ".jpg");
 
         try {
             FileOutputStream fOut = new FileOutputStream(file);
 
-            ImageToSave.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+            ImageToSave.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
             fOut.flush();
             fOut.close();
             MakeSureFileWasCreatedThenMakeAvabile(file);
             AbleToSave();
+            EnviarEmail mail = new EnviarEmail();
+            mail.enviarQR(NameOfFolder, NameOfFile, Correo, Correo, context);
         }
 
         catch(FileNotFoundException e) {

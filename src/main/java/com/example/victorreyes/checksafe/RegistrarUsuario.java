@@ -1,6 +1,7 @@
 package com.example.victorreyes.checksafe;
 
 import android.Manifest;
+import android.accounts.AuthenticatorException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -9,16 +10,19 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,37 +31,43 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.zxing.WriterException;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class RegistrarUsuario extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class RegistrarUsuario extends AppCompatActivity {
 
-    EditText campoId, campoNombre, campoApellido, campoEmail, campoGrado, campoGrupo;
-    RadioButton campoFemenino, campoMasculino;
+    EditText campoId, campoNombre, campoApellido, campoEmail, campoGrado, campoGrupo;//contenedores para los valores cachados de los EditText
+    RadioButton campoFemenino, campoMasculino;//contenedores para RadioButton
     String sexo = "";
-    Bitmap bitmap, bmap ;
-    ImageView imagen;
-    /*private static final String CARPETA_PRINCIPAL = "misImagenesApp/";//directorio principal
+    Bitmap bitmap, bmap;//Aqui se almacenan imagenes
+    ImageView imagen;//contenedor para ImagenView
+    private static final String CARPETA_PRINCIPAL = "misImagenesApp/";//directorio principal
     private static final String CARPETA_IMAGEN = "imagenes";//carpeta donde se guardan las fotos
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN;//ruta carpeta de directorios
     private String mipath;//almacena la ruta de la imagen
-    File fileImagen;*/
+    File fileImagen;
     public static final int COD_GALERIA = 10;
     public static final int COD_FOTO = 20;
 
 
     RequestQueue request;
-    JsonObjectRequest jsonObjectRequest;
+    StringRequest stringRequest;
 
     //permission STORAGE
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -68,6 +78,7 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
 
     public static void verifyStoragePermissions(Activity activity) {
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permissionCamera = ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             // We don’t have permission so prompt the user
@@ -75,6 +86,14 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
                     activity,
                     PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE
+            );
+        }
+
+        if (permissionCamera != PackageManager.PERMISSION_GRANTED) {
+            // We don’t have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    new String[]{Manifest.permission.CAMERA},5
             );
         }
     }//fin permission STORAGE
@@ -106,7 +125,7 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
 
         mostrarDialogOpciones();
     }
-
+    //Muestra un dialog con opciones
     private void mostrarDialogOpciones() {
 
         final CharSequence[] opciones = { "Tomar Foto", "Elegir de Galeria", "Cancelar"};
@@ -118,7 +137,7 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
 
                 if(opciones[i].equals("Tomar Foto")){
 
-                    //abriCamara();
+                    abriCamara();
                 }else{
                     if (opciones[i].equals("Elegir de Galeria")){
 
@@ -135,8 +154,11 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
         builder.show();
     }
 
-    /*private void abriCamara() {
+    //
+    private void abriCamara() {
 
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         File miFile=new File(Environment.getExternalStorageDirectory(),DIRECTORIO_IMAGEN);
         boolean isCreada=miFile.exists();
 
@@ -156,7 +178,7 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
             Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(fileImagen));
 
-            ////
+            /*
             if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.N)
             {
                 String authorities=this.getPackageName()+".provider";
@@ -165,14 +187,11 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
             }else
             {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileImagen));
-            }
+            }*/
             startActivityForResult(intent,COD_FOTO);
-
-            ////
-
         }
 
-    }*/
+    }
 
 
     @Override
@@ -193,7 +212,7 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
                 }
                 break;
 
-            /*case COD_FOTO:
+            case COD_FOTO:
                 MediaScannerConnection.scanFile(this, new String[]{mipath}, null,
                         new MediaScannerConnection.OnScanCompletedListener() {
                             @Override
@@ -205,8 +224,30 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
                 bitmap= BitmapFactory.decodeFile(mipath);
                 imagen.setImageBitmap(bitmap);
 
-                break;*/
+                break;
         }
+        bitmap=redimencionarImagen(bitmap, 600, 800);
+    }
+
+    private Bitmap redimencionarImagen(Bitmap bitmap, float ancho, float alto) {
+
+        int anchoImg = bitmap.getWidth();
+        int altoImg = bitmap.getHeight();
+
+        if(anchoImg>ancho || altoImg>alto){
+
+            float escalaAncho = ancho/anchoImg;
+            float escalaAlto = alto/altoImg;
+
+            Matrix matrix = new Matrix();
+            matrix.postScale(escalaAncho,escalaAlto);
+
+            return Bitmap.createBitmap(bitmap,0,0,anchoImg,altoImg,matrix,false);
+        }else{
+
+            return bitmap;
+        }
+
     }
 
     public void onClick(View view){
@@ -219,8 +260,8 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
         GenerarQR generarQR = new GenerarQR();
         if(campoId.getText().toString()!=null){
             try {
-                bitmap = generarQR.TextToImageEncode(campoId.getText().toString(), this);
-                generarQR.saveImage(bitmap, this, campoId.getText().toString(), campoNombre.getText().toString(), campoGrado.getText().toString(), campoGrupo.getText().toString() );  //give read write permission
+                bmap = generarQR.TextToImageEncode(campoId.getText().toString(), this);
+                generarQR.saveImage(bmap, this, campoId.getText().toString(), campoNombre.getText().toString(), campoEmail.getText().toString(), campoGrado.getText().toString(), campoGrupo.getText().toString() );  //give read write permission
             } catch (WriterException e) {
                 e.printStackTrace();
             }
@@ -232,28 +273,73 @@ public class RegistrarUsuario extends AppCompatActivity implements Response.List
 
 
 
-        String url = "http://192.168.8.101/DataBase_CheckSafe/CheckSafe_DB.php?NoCuenta=" + campoId.getText().toString() + "&Nombre=" + campoNombre.getText().toString() + "&Apellido=" + campoApellido.getText().toString() + "&Email=" + campoEmail.getText().toString() + "&Grado=" + campoGrado.getText().toString() + "&Grupo=" + campoGrupo.getText().toString() + "&Sexo=" + sexo;
+        String url = "http://192.168.8.100/DataBase_CheckSafe/CheckSafe_DB_RegistrarUsuario.php?";
         //url = url.replace(" ", "%20");
 
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
-        request.add(jsonObjectRequest);
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if(response.trim().equalsIgnoreCase("registra")){
+
+                    campoId.setText("");
+                    campoNombre.setText("");
+                    campoApellido.setText("");
+                    campoEmail.setText("");
+                    campoGrupo.setText("");
+                    campoGrado.setText("");
+                    Toast.makeText(getApplicationContext(),"Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    Toast.makeText(getApplicationContext(),"No se ha registrado", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(),"No se ha podido establecer conexión", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                String NoCuenta = campoId.getText().toString();
+                String Nombre = campoNombre.getText().toString();
+                String Apellido = campoApellido.getText().toString();
+                String Email = campoEmail.getText().toString();
+                String Grado = campoGrado.getText().toString();
+                String Grupo = campoGrupo.getText().toString();
+                String Imagen = convertirImgString(bitmap);
+
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("NoCuenta", NoCuenta);
+                parametros.put("Nombre", Nombre);
+                parametros.put("Apellido", Apellido);
+                parametros.put("Email", Email);
+                parametros.put("Grado", Grado);
+                parametros.put("Grupo", Grupo);
+                parametros.put("Sexo", "Indefinido");
+                parametros.put("Foto", Imagen);
+
+
+
+                return parametros;
+            }
+        };
+
+        request.add(stringRequest);
     }
 
+    private String convertirImgString(Bitmap bitmap){
 
-    @Override
-    public void onErrorResponse(VolleyError error) {
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,array);
+        byte[] imagenByte = array.toByteArray();
+        String imagenString = Base64.encodeToString(imagenByte,Base64.DEFAULT);
 
-        Toast.makeText(getApplicationContext(), "Se Ha Generado Un Error" + error.toString(), Toast.LENGTH_SHORT).show();
-        Log.w("ERROR",error.toString());
-        limpiarCampos();
-    }
-
-    @Override
-    public void onResponse(JSONObject response) {
-
-        Log.i("Correcto","Respuesta es : " + response);
-        Toast.makeText(getApplicationContext(), "Se Ha Registrado Exitosamente", Toast.LENGTH_SHORT).show();
-        limpiarCampos();
+        return imagenString;
     }
 
     private void limpiarCampos() {

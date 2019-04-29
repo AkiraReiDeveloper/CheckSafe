@@ -50,13 +50,13 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
     }
 
     public void onClick(View view){
-
-        cargarWebService();
+        String id = campoId.getText().toString();
+        cargarWebService(id);
     }
 
-    private void cargarWebService() {
+    private void cargarWebService(String id) {
 
-        String url = "http://192.168.8.101/DataBase_CheckSafe/CheckSafe_DB_Consulta_Usuario.php?NoCuenta=" + campoId.getText().toString();
+        String url = "http://192.168.8.100/DataBase_CheckSafe/CheckSafe_DB_Consulta_Usuario.php?NoCuenta=" + id;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         request.add(jsonObjectRequest);
@@ -72,7 +72,7 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
     @Override
     public void onResponse(JSONObject response) {
 
-        Toast.makeText(getApplicationContext(), "Se Ha Consultado Exitosamente", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Se ha Consultado Exitosamente", Toast.LENGTH_SHORT).show();
 
         Usuario miUsuario = new Usuario();
 

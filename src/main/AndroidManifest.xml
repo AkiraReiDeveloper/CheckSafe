@@ -44,6 +44,28 @@
             android:name=".ListarUsuarios"
             android:screenOrientation="portrait">
         </activity>
+<!--Permisos de la camara no esta en uso-
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.halo.loginui2.vistas.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"></meta-data>
+        </provider>﻿-->
+<!--permisos para enviar correo-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.myfileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
     </application>
+
 
 </manifest>

@@ -36,10 +36,10 @@ public class GenerarQR {
     private String NameOfFolder = "";
     private Context TheThis;
 
-    public void saveImage(Bitmap ImageToSave, Context context, String noCuenta, String nombre, String Correo, String grupo, String grado) {
+    public void saveImage(Bitmap ImageToSave, Context context, String nameImage, String nameFolder ) {
 
         this.TheThis = context;
-        NameOfFolder = "/Gastronomia " + "Salon: " + grupo + "-" + grado;
+        NameOfFolder = nameFolder;
         String file_path = Environment.getExternalStorageDirectory().getAbsolutePath() + NameOfFolder;
         String CurrentDateAndTime = getCurrentDateAndTime();
         File dir = new File(file_path);
@@ -48,7 +48,7 @@ public class GenerarQR {
             dir.mkdirs();
         }
         //nombre de la imagen
-        NameOfFile = noCuenta + "_" + nombre + "_" + grupo + "_" + grado + "_" + CurrentDateAndTime;
+        NameOfFile = nameImage;
 
         File file = new File(dir, NameOfFile + ".jpg");
 
@@ -60,8 +60,6 @@ public class GenerarQR {
             fOut.close();
             MakeSureFileWasCreatedThenMakeAvabile(file);
             AbleToSave();
-            EnviarEmail mail = new EnviarEmail();
-            mail.enviarQR(NameOfFolder, NameOfFile, Correo, Correo, context);
         }
 
         catch(FileNotFoundException e) {
@@ -82,8 +80,8 @@ public class GenerarQR {
                     }
                 });
     }
-
-    private String getCurrentDateAndTime() {
+//preferible private
+    public String getCurrentDateAndTime() {
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-­ss");
         String formattedDate = df.format(c.getTime());

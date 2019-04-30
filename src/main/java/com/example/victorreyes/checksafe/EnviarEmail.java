@@ -13,13 +13,13 @@ import java.io.File;
 
 public class EnviarEmail {
 
-    public void enviarQR(String nombreCarpeta, String nombreArchivo, String emailDestino, String emailCopia, Context context){
+    public void enviarImagen(String nombreCarpeta, String nombreArchivo, String emailDestino, String emailCopia, Context context){
 
-        String pdfFile = String.valueOf(new File(Environment.getExternalStorageDirectory() + nombreCarpeta+"/",nombreArchivo + ".jpg" ));
+        String imgFile = String.valueOf(new File(Environment.getExternalStorageDirectory() + nombreCarpeta+"/",nombreArchivo + ".jpg" ));
 
 
         Uri fileUri;
-        fileUri = FileProvider.getUriForFile(context, "com.myfileprovider", new File(pdfFile));
+        fileUri = FileProvider.getUriForFile(context, "com.myfileprovider", new File(imgFile));
         //Validación de acuerdo al OS.
         /*if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M){
 

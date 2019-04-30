@@ -54,7 +54,7 @@ public class RegistrarUsuario extends AppCompatActivity {
 
     EditText campoId, campoNombre, campoApellido, campoEmail, campoGrado, campoGrupo;//contenedores para los valores cachados de los EditText
     RadioButton campoFemenino, campoMasculino;//contenedores para RadioButton
-    String sexo = "";
+    String campoSexo = "";
     Bitmap bitmap, bmap;//Aqui se almacenan imagenes
     ImageView imagen;//contenedor para ImagenView
     private static final String CARPETA_PRINCIPAL = "misImagenesApp/";//directorio principal
@@ -257,11 +257,20 @@ public class RegistrarUsuario extends AppCompatActivity {
     }
 
     private void GenerarCodigoQR() {
+        //instacia de variable de tipo GenerarQR
         GenerarQR generarQR = new GenerarQR();
+        //instancia de variable de tipo EnviarEmail
+        EnviarEmail mail = new EnviarEmail();
+
         if(campoId.getText().toString()!=null){
             try {
+                String NameOfImage = campoId.getText().toString()  + "_" +  campoNombre.getText().toString()  + "_" +  campoGrado.getText().toString()  + "_" +  campoGrupo.getText().toString()+ "_" + generarQR.getCurrentDateAndTime();
+                String NameOfFolder = "/Gastronomia " + "Salon: " +  campoGrado.getText().toString()  + "_" +  campoGrupo.getText().toString();
                 bmap = generarQR.TextToImageEncode(campoId.getText().toString(), this);
-                generarQR.saveImage(bmap, this, campoId.getText().toString(), campoNombre.getText().toString(), campoEmail.getText().toString(), campoGrado.getText().toString(), campoGrupo.getText().toString() );  //give read write permission
+                generarQR.saveImage(bmap, this, NameOfImage, NameOfFolder );  //give read write permission
+                //Metodo de la clase enviar EnviarEmail para enviar email
+                mail.enviarImagen(NameOfFolder, NameOfImage, campoEmail.getText().toString(), campoEmail.getText().toString(), this);
+
             } catch (WriterException e) {
                 e.printStackTrace();
             }
@@ -288,6 +297,7 @@ public class RegistrarUsuario extends AppCompatActivity {
                     campoEmail.setText("");
                     campoGrupo.setText("");
                     campoGrado.setText("");
+
                     Toast.makeText(getApplicationContext(),"Se ha registrado con exito", Toast.LENGTH_SHORT).show();
                 }else{
 
@@ -311,6 +321,15 @@ public class RegistrarUsuario extends AppCompatActivity {
                 String Email = campoEmail.getText().toString();
                 String Grado = campoGrado.getText().toString();
                 String Grupo = campoGrupo.getText().toString();
+                if (campoMasculino.isChecked()==true) {
+
+                    campoSexo = "Masculino";
+                } else
+                if (campoFemenino.isChecked()==true) {
+
+                    campoSexo = "Femenino";
+                }
+
                 String Imagen = convertirImgString(bitmap);
 
                 Map<String, String> parametros = new HashMap<>();
@@ -320,14 +339,16 @@ public class RegistrarUsuario extends AppCompatActivity {
                 parametros.put("Email", Email);
                 parametros.put("Grado", Grado);
                 parametros.put("Grupo", Grupo);
-                parametros.put("Sexo", "Indefinido");
+                parametros.put("Sexo", campoSexo);
                 parametros.put("Foto", Imagen);
 
 
 
                 return parametros;
             }
+
         };
+        //Toast.makeText(getApplicationContext(), "Sexo:"+campoSexo,Toast.LENGTH_LONG).show();
 
         request.add(stringRequest);
     }

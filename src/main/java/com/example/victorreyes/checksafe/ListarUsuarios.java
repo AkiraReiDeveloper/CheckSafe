@@ -61,7 +61,7 @@ public class ListarUsuarios extends AppCompatActivity implements Response.Listen
 
     private void cargarWebService() {
 
-        String url = "http://192.168.8.100/DataBase_CheckSafe/CheckSafe_DB_Consulta_Lista_Usuario.php";
+        String url = "http://192.168.8.103/DataBase_CheckSafe/CheckSafe_DB_Consulta_Lista_Usuario.php";
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         request.add(jsonObjectRequest);
     }
@@ -82,7 +82,7 @@ public class ListarUsuarios extends AppCompatActivity implements Response.Listen
 
         try {
 
-            for (int i=1;i<json.length();i++){
+            for (int i=0;i<json.length();i++){
 
                 usuario=new Usuario();
                 JSONObject jsonObject=null;

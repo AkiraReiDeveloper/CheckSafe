@@ -10,20 +10,24 @@
         android:id="@+id/textGrupoU"
         android:layout_width="211dp"
         android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:hint="@string/txtGrupo"
         android:textColor="@color/colorWhiteTr"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textSexoU"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toEndOf="@+id/textGrupoL" />
 
     <TextView
         android:id="@+id/textSexoU"
         android:layout_width="211dp"
         android:layout_height="25dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginLeft="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:hint="@string/textSexoU"
@@ -31,31 +35,27 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/separador"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/textSexoL" />
 
     <TextView
         android:id="@+id/textGrupoL"
         android:layout_width="108dp"
         android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
         android:text="@string/txtGrupo"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textSexoL"
-        app:layout_constraintEnd_toStartOf="@+id/textGrupoU"
-        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textSexoL"
         android:layout_width="108dp"
         android:layout_height="25dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
         android:text="@string/textSexoL"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
@@ -67,63 +67,84 @@
         android:id="@+id/textEmailU"
         android:layout_width="211dp"
         android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:hint="@string/txtEmail"
         android:textColor="@color/colorWhiteTr"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textGradoU"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toEndOf="@+id/textEmailL" />
 
     <TextView
         android:id="@+id/textGradoU"
         android:layout_width="211dp"
         android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:hint="@string/txtGrado"
         android:textColor="@color/colorWhiteTr"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textGrupoU"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toEndOf="@+id/textGradoL" />
 
     <TextView
         android:id="@+id/textApellidosU"
-        android:layout_width="211dp"
+        android:layout_width="168dp"
         android:layout_height="25dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:hint="@string/txtApellidos"
         android:textColor="@color/colorWhiteTr"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textEmailU"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textApellidosL" />
 
     <TextView
         android:id="@+id/textNoCuentaU"
-        android:layout_width="211dp"
+        android:layout_width="168dp"
         android:layout_height="29dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:hint="@string/txtNoCuenta"
         android:textColor="@color/colorWhiteTr"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textNombreU"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgConsultarListaUsuarios" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textNoCuentaL"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textNombreU"
-        android:layout_width="211dp"
+        android:layout_width="168dp"
         android:layout_height="25dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:hint="@string/txtNombres"
         android:textColor="@color/colorWhiteTr"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textApellidosU"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textNombreL" />
 
     <TextView
         android:id="@+id/textNoCuentaL"
@@ -131,31 +152,28 @@
         android:layout_height="29dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/txtNoCuenta"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textNombreL"
-        app:layout_constraintEnd_toStartOf="@+id/textNoCuentaU"
-        app:layout_constraintHorizontal_bias="0.212"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgConsultarListaUsuarios" />
+        app:layout_constraintStart_toEndOf="@+id/imgConsultarListaUsuarios"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imgConsultarListaUsuarios"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/imgConsultarUsuarios"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textEmailL"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/img_base" />
 
     <TextView
@@ -164,15 +182,11 @@
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:text="@string/txtNombres"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textApellidosL"
-        app:layout_constraintEnd_toStartOf="@+id/textNombreU"
-        app:layout_constraintHorizontal_bias="0.195"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imgConsultarListaUsuarios" />
 
     <TextView
         android:id="@+id/textApellidosL"
@@ -180,46 +194,34 @@
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:text="@string/txtApellidos"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textEmailL"
-        app:layout_constraintEnd_toStartOf="@+id/textApellidosU"
-        app:layout_constraintHorizontal_bias="0.195"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imgConsultarListaUsuarios" />
 
     <TextView
         android:id="@+id/textEmailL"
         android:layout_width="108dp"
         android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
         android:text="@string/txtEmail"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textGradoL"
-        app:layout_constraintEnd_toStartOf="@+id/textEmailU"
-        app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textGradoL"
         android:layout_width="108dp"
         android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
         android:text="@string/txtGrado"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textGrupoL"
-        app:layout_constraintEnd_toStartOf="@+id/textGradoU"
-        app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -230,6 +232,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/separador"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
@@ -237,5 +240,6 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

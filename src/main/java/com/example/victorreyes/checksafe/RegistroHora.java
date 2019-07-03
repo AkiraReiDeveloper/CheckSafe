@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class RegistroHora {
 
-    //private Context TheThis;
+    //private Context TheThis;//
     RequestQueue request;
     StringRequest stringRequest2;
 

@@ -127,6 +127,7 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
+        android:onClick="onClick"
         android:text="Continuar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -35,9 +35,12 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
 
     private ZXingScannerView vistaescaner;
     Boolean selecthour = false;
-    Boolean cotinuarScan = false;
+    //Boolean continuarScan = false;
+    String resultado;
     RequestQueue request;
     JsonObjectRequest jsonRequest;
+
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +81,21 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
                 abilitarBotones("#848484", "#192144");
                 break;
             case R.id.btnContinuarScan:
+                RegistroHora entrada = new RegistroHora();
 
+                if (selecthour) {
+                    entrada.horaSalida(this, resultado);
+                } else {
+                    entrada.horaEntrada(this, resultado);
+                }
+                resultado = "";
+                dialog.cancel();
+                vistaescaner.resumeCameraPreview(this);
+                //dialog.dismiss();
                 break;
             case R.id.btnDenegarScan:
+                dialog.cancel();
+                vistaescaner.resumeCameraPreview(this);
                 break;
         }
     }
@@ -150,7 +165,8 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
         request.add(jsonRequest);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogLayout);
-        builder.show();
+        dialog = builder.show();
+        //dialog.show();
     }
 
     @Override
@@ -162,20 +178,8 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
         //builder.setMessage(result.getText());
         AlertDialog alerDialog = builder.create();
         alerDialog.show();
-        String resultado = result.getText();
+        resultado = result.getText();
         datosLayout(resultado);
-        RegistroHora entrada = new RegistroHora();
-
-        if(cotinuarScan) {
-            if (selecthour) {
-                entrada.horaSalida(this, resultado);
-            } else {
-                entrada.horaEntrada(this, resultado);
-            }
-        }
-
-
-        //vistaescaner.resumeCameraPreview(this);
     }
 
 

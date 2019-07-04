@@ -50,9 +50,13 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
     }
 
     public void onClick(View view){
+
         String id = campoId.getText().toString();
         cargarWebService(id);
+
     }
+
+
 
     public void cargarWebService(String id) {
 

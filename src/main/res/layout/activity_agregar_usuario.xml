@@ -232,7 +232,8 @@
         app:layout_constraintEnd_toStartOf="@+id/btnAgregarFoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:srcCompat="@drawable/img_base" />
+        app:srcCompat="@drawable/img_base"
+        android:tag="img_registra"/>
 
     <Button
         android:id="@+id/btnAgregarFoto"

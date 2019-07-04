@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -252,8 +253,34 @@ public class RegistrarUsuario extends AppCompatActivity {
 
     public void onClick(View view){
 
-        cargarWebSevice();
-        GenerarCodigoQR();
+        if (validarCampos()) {
+
+            cargarWebSevice();
+            GenerarCodigoQR();
+        }
+    }
+
+    public boolean validarCampos(){
+
+        boolean validador = true;
+
+        //Toast.makeText(getApplicationContext(), "Campo" + campoId.getText().toString(), Toast.LENGTH_SHORT).show();
+        if(campoId.getText().toString().isEmpty() || campoNombre.getText().toString().isEmpty()
+                    || campoApellido.getText().toString().isEmpty() || campoEmail.getText().toString().isEmpty()
+                    || campoGrado.getText().toString().isEmpty() || campoGrupo.getText().toString().isEmpty()) {
+            if (campoFemenino.isChecked() == false && campoMasculino.isChecked() == false){
+
+                        validador = false;
+                        Toast.makeText(getApplicationContext(), "Tienes que ingresar toda la información", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if(bitmap==null){
+            Toast.makeText(getApplicationContext(), "Tienes que ingresar una fotografia", Toast.LENGTH_SHORT).show();
+            validador = false;
+        }
+
+        return validador;
     }
 
     private void GenerarCodigoQR() {

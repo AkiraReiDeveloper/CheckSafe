@@ -60,7 +60,7 @@ public class ConsultarUsuario extends AppCompatActivity implements Response.List
 
     public void cargarWebService(String id) {
 
-        String url = "http://192.168.8.103/DataBase_CheckSafe/CheckSafe_DB_Consulta_Usuario.php?NoCuenta=" + id;
+        String url = "http://192.168.8.105/DataBase_CheckSafe/CheckSafe_DB_Consulta_Usuario.php?NoCuenta=" + id;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         request.add(jsonObjectRequest);

@@ -112,7 +112,7 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
         final TextView txtVSexoScan = (TextView) dialogLayout.findViewById(R.id.textSexoScan);
         final ImageView campoImageScan = (ImageView) dialogLayout.findViewById(R.id.campoImagenScan);
         request = Volley.newRequestQueue(this);
-        String url = "http://192.168.8.103/DataBase_CheckSafe/CheckSafe_DB_Consulta_Usuario.php?NoCuenta=" + identificador;
+        String url = "http://192.168.8.105/DataBase_CheckSafe/CheckSafe_DB_Consulta_Usuario.php?NoCuenta=" + identificador;
         jsonRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>(){
 
             @Override

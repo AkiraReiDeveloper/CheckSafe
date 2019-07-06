@@ -31,7 +31,7 @@ public class RegistroHora {
         final String currentDateandTime = sdf.format(new Date());
         Toast.makeText(context, currentDateandTime,Toast.LENGTH_LONG).show();
 
-        String url = "http://192.168.8.103/DataBase_CheckSafe/CheckSafe_DB_Fecha_Entrada.php?";
+        String url = "http://192.168.8.105/DataBase_CheckSafe/CheckSafe_DB_Fecha_Entrada.php?";
         //url = url.replace(" ", "%20");
 
         stringRequest2 = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

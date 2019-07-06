@@ -309,7 +309,7 @@ public class RegistrarUsuario extends AppCompatActivity {
 
 
 
-        String url = "http://192.168.8.103/DataBase_CheckSafe/CheckSafe_DB_RegistrarUsuario.php?";
+        String url = "http://192.168.8.105/DataBase_CheckSafe/CheckSafe_DB_RegistrarUsuario.php?";
         //url = url.replace(" ", "%20");
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

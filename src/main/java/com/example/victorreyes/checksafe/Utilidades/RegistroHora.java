@@ -1,15 +1,14 @@
-package com.example.victorreyes.checksafe;
+package com.example.victorreyes.checksafe.Utilidades;
 
 import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.victorreyes.checksafe.Entidades.VolleySingleton;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,21 +17,17 @@ import java.util.Map;
 
 public class RegistroHora {
 
-    //private Context TheThis;//
-    RequestQueue request;
     StringRequest stringRequest2;
 
 
     public void horaEntrada(final Context context, String usuario){
 
-        request = Volley.newRequestQueue(context);
         final String user = usuario;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String currentDateandTime = sdf.format(new Date());
         Toast.makeText(context, currentDateandTime,Toast.LENGTH_LONG).show();
 
-        String url = "http://192.168.8.105/DataBase_CheckSafe/CheckSafe_DB_Fecha_Entrada.php?";
-        //url = url.replace(" ", "%20");
+        String url = "http://192.168.8.103/DataBase_CheckSafe/CheckSafe_DB_Fecha_Entrada.php?";
 
         stringRequest2 = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -57,12 +52,10 @@ public class RegistroHora {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                //String NoCuenta = campoId.getText().toString();
                 String HoraEntrada = currentDateandTime;
                 String IdUsuario = user;
 
                 Map<String, String> parametros = new HashMap<>();
-                //parametros.put("NoCuenta", NoCuenta);
                 parametros.put("HoraEntrada", HoraEntrada);
                 parametros.put("IdUsuario", IdUsuario);
 
@@ -70,22 +63,19 @@ public class RegistroHora {
             }
 
         };
-        //Toast.makeText(getApplicationContext(), "Sexo:"+campoSexo,Toast.LENGTH_LONG).show();
 
-        request.add(stringRequest2);
+        VolleySingleton.getIntanciaVolley(context).addToRequestQueue(stringRequest2);
 
     }
 
     public void horaSalida(final Context context, String usuario){
 
-        request = Volley.newRequestQueue(context);
         final String user = usuario;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final String currentDateandTime = sdf.format(new Date());
         Toast.makeText(context, currentDateandTime,Toast.LENGTH_LONG).show();
 
         String url = "http://192.168.8.103/DataBase_CheckSafe/CheckSafe_DB_Fecha_Salida.php?";
-        //url = url.replace(" ", "%20");
 
         stringRequest2 = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -110,12 +100,10 @@ public class RegistroHora {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                //String NoCuenta = campoId.getText().toString();
                 String HoraSalida = currentDateandTime;
                 String IdUsuario = user;
 
                 Map<String, String> parametros = new HashMap<>();
-                //parametros.put("NoCuenta", NoCuenta);
                 parametros.put("HoraSalida", HoraSalida);
                 parametros.put("IdUsuario", IdUsuario);
 
@@ -123,9 +111,7 @@ public class RegistroHora {
             }
 
         };
-        //Toast.makeText(getApplicationContext(), "Sexo:"+campoSexo,Toast.LENGTH_LONG).show();
-
-        request.add(stringRequest2);
+        VolleySingleton.getIntanciaVolley(context).addToRequestQueue(stringRequest2);
 
     }
 }

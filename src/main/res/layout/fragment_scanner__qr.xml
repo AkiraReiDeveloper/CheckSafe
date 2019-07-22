@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Fragments.Scanner_QR">
 
+    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -21,7 +23,7 @@
             android:id="@+id/textv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -46,8 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="84dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +69,6 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:onClick="onClick"
             android:text="Entrada"
             android:textAllCaps="true"
             android:textColor="@color/colorWhite"
@@ -88,7 +88,6 @@
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="2dp"
-            android:onClick="onClick"
             android:text="Salida"
             android:textAllCaps="true"
             android:textColor="@color/colorWhite"
@@ -96,4 +95,5 @@
 
 
     </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>

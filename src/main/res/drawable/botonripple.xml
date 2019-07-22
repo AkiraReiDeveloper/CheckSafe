@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:color="@color/colorWhiteTr"
-    tools:ignore="NewApi">
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/borderedondo"></item>
-</ripple>
+    <solid android:color="@color/colorAccent"/>
+
+    <stroke android:width="3dp"
+        android:color="@color/colorWhite" />
+
+    <padding android:left="1dp"
+        android:top="1dp"
+        android:right="1dp"
+        android:bottom="1dp"/>
+
+
+</shape>

@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/textGrupoU"
-        android:layout_width="168dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -24,8 +24,8 @@
 
     <TextView
         android:id="@+id/textSexoU"
-        android:layout_width="168dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -40,8 +40,8 @@
 
     <TextView
         android:id="@+id/textGrupoL"
-        android:layout_width="108dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="@string/txtGrupo"
@@ -52,8 +52,8 @@
 
     <TextView
         android:id="@+id/textSexoL"
-        android:layout_width="108dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="@string/textSexoL"
@@ -65,8 +65,8 @@
 
     <TextView
         android:id="@+id/textEmailU"
-        android:layout_width="168dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -81,8 +81,8 @@
 
     <TextView
         android:id="@+id/textGradoU"
-        android:layout_width="168dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -97,8 +97,8 @@
 
     <TextView
         android:id="@+id/textApellidosU"
-        android:layout_width="168dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -113,11 +113,10 @@
 
     <TextView
         android:id="@+id/textNoCuentaU"
-        android:layout_width="168dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="@string/txtNoCuenta"
@@ -132,8 +131,8 @@
 
     <TextView
         android:id="@+id/textNombreU"
-        android:layout_width="168dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -148,11 +147,10 @@
 
     <TextView
         android:id="@+id/textNoCuentaL"
-        android:layout_width="108dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/txtNoCuenta"
         android:textColor="@color/colorAccent"
         android:textSize="9sp"
@@ -167,7 +165,7 @@
         android:layout_height="79dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/imgConsultarUsuarios"
         app:layout_constraintBottom_toBottomOf="@+id/separador"
@@ -177,8 +175,8 @@
 
     <TextView
         android:id="@+id/textNombreL"
-        android:layout_width="108dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="@string/txtNombres"
@@ -189,8 +187,8 @@
 
     <TextView
         android:id="@+id/textApellidosL"
-        android:layout_width="108dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="@string/txtApellidos"
@@ -201,8 +199,8 @@
 
     <TextView
         android:id="@+id/textEmailL"
-        android:layout_width="108dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="@string/txtEmail"
@@ -213,8 +211,8 @@
 
     <TextView
         android:id="@+id/textGradoL"
-        android:layout_width="108dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="@string/txtGrado"
@@ -225,8 +223,8 @@
 
     <TextView
         android:id="@+id/separador"
-        android:layout_width="385dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"

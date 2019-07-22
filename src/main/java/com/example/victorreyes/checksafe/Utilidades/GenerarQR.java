@@ -1,4 +1,4 @@
-package com.example.victorreyes.checksafe;
+package com.example.victorreyes.checksafe.Utilidades;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.victorreyes.checksafe.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;

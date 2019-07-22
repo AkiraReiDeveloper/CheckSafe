@@ -1,32 +1,28 @@
-package com.example.victorreyes.checksafe;
+package com.example.victorreyes.checksafe.Fragments;
 
 import android.Manifest;
-import android.accounts.AuthenticatorException;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -34,25 +30,41 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.victorreyes.checksafe.Entidades.VolleySingleton;
+import com.example.victorreyes.checksafe.Utilidades.EnviarEmail;
+import com.example.victorreyes.checksafe.Utilidades.GenerarQR;
+import com.example.victorreyes.checksafe.R;
+import com.example.victorreyes.checksafe.Utilidades.VariablesEstaticas;
 import com.google.zxing.WriterException;
 
-import org.json.JSONObject;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistrarUsuario extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link RegistrarAlumno.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link RegistrarAlumno#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class RegistrarAlumno extends Fragment implements View.OnClickListener {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    //variables de la clase
     EditText campoId, campoNombre, campoApellido, campoEmail, campoGrado, campoGrupo;//contenedores para los valores cachados de los EditText
     RadioButton campoFemenino, campoMasculino;//contenedores para RadioButton
     String campoSexo = "";
@@ -66,8 +78,6 @@ public class RegistrarUsuario extends AppCompatActivity {
     public static final int COD_GALERIA = 10;
     public static final int COD_FOTO = 20;
 
-
-    RequestQueue request;
     StringRequest stringRequest;
 
     //permission STORAGE
@@ -99,38 +109,128 @@ public class RegistrarUsuario extends AppCompatActivity {
         }
     }//fin permission STORAGE
 
+    private OnFragmentInteractionListener mListener;
+
+    public RegistrarAlumno() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment RegistrarAlumno.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static RegistrarAlumno newInstance(String param1, String param2) {
+        RegistrarAlumno fragment = new RegistrarAlumno();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
-
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_usuario);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
-        verifyStoragePermissions(this);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_registrar_alumno, container, false);
+        verifyStoragePermissions((Activity) getContext());
 
-        request = Volley.newRequestQueue(this);
+        campoId = (EditText) view.findViewById(R.id.txtNoCuenta);
+        campoNombre = (EditText) view.findViewById(R.id.txtNombre);
+        campoApellido = (EditText) view.findViewById(R.id.txtApellido);
+        campoEmail = (EditText) view.findViewById(R.id.txtEmail);
+        campoGrado = (EditText) view.findViewById(R.id.txtGrado);
+        campoGrupo = (EditText) view.findViewById(R.id.txtGrupo);
+        campoFemenino = (RadioButton) view.findViewById(R.id.radFemenino);
+        campoMasculino = (RadioButton) view.findViewById(R.id.radMasculino);
+        imagen = (ImageView) view.findViewById(R.id.imgNewUser);
 
-        campoId = (EditText) findViewById(R.id.txtNoCuenta);
-        campoNombre = (EditText) findViewById(R.id.txtNombre);
-        campoApellido = (EditText) findViewById(R.id.txtApellido);
-        campoEmail = (EditText) findViewById(R.id.txtEmail);
-        campoGrado = (EditText) findViewById(R.id.txtGrado);
-        campoGrupo = (EditText) findViewById(R.id.txtGrupo);
-        campoFemenino = (RadioButton) findViewById(R.id.radFemenino);
-        campoMasculino = (RadioButton) findViewById(R.id.radMasculino);
-        imagen = (ImageView) findViewById(R.id.imgNewUser);
+        //botones
+
+        View btnFoto = view.findViewById(R.id.btnAgregarFoto);
+        View btnRegistrar = view.findViewById(R.id.btnRegistra);
+        btnFoto.setOnClickListener(this);
+        btnRegistrar.setOnClickListener(this);
+        return view;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        int id = v.getId();
+
+        if (id == R.id.btnAgregarFoto){
+
+            mostrarDialogOpciones();
+
+        }else if (id == R.id.btnRegistra){
+            if (validarCampos()) {
+
+                cargarWebSevice();
+                GenerarCodigoQR();
+            }
+        }
 
     }
 
-    public void onClickimg(View view){
-
-        mostrarDialogOpciones();
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
+
     //Muestra un dialog con opciones
     private void mostrarDialogOpciones() {
 
         final CharSequence[] opciones = { "Tomar Foto", "Elegir de Galeria", "Cancelar"};
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Elige una Opción");
         builder.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
@@ -196,7 +296,7 @@ public class RegistrarUsuario extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode){
@@ -206,7 +306,7 @@ public class RegistrarUsuario extends AppCompatActivity {
                 imagen.setImageURI(path);
 
                 try {
-                    bitmap=MediaStore.Images.Media.getBitmap(this.getContentResolver(),path);
+                    bitmap=MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),path);
                     imagen.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -214,7 +314,7 @@ public class RegistrarUsuario extends AppCompatActivity {
                 break;
 
             case COD_FOTO:
-                MediaScannerConnection.scanFile(this, new String[]{mipath}, null,
+                MediaScannerConnection.scanFile(getContext(), new String[]{mipath}, null,
                         new MediaScannerConnection.OnScanCompletedListener() {
                             @Override
                             public void onScanCompleted(String mipath, Uri uri) {
@@ -251,14 +351,7 @@ public class RegistrarUsuario extends AppCompatActivity {
 
     }
 
-    public void onClick(View view){
 
-        if (validarCampos()) {
-
-            cargarWebSevice();
-            GenerarCodigoQR();
-        }
-    }
 
     public boolean validarCampos(){
 
@@ -266,17 +359,17 @@ public class RegistrarUsuario extends AppCompatActivity {
 
         //Toast.makeText(getApplicationContext(), "Campo" + campoId.getText().toString(), Toast.LENGTH_SHORT).show();
         if(campoId.getText().toString().isEmpty() || campoNombre.getText().toString().isEmpty()
-                    || campoApellido.getText().toString().isEmpty() || campoEmail.getText().toString().isEmpty()
-                    || campoGrado.getText().toString().isEmpty() || campoGrupo.getText().toString().isEmpty()) {
-            if (campoFemenino.isChecked() == false && campoMasculino.isChecked() == false){
+                || campoApellido.getText().toString().isEmpty() || campoEmail.getText().toString().isEmpty()
+                || campoGrado.getText().toString().isEmpty() || campoGrupo.getText().toString().isEmpty()) {
+            if (campoFemenino.isChecked() == false || campoMasculino.isChecked() == false){
 
-                        validador = false;
-                        Toast.makeText(getApplicationContext(), "Tienes que ingresar toda la información", Toast.LENGTH_SHORT).show();
+                validador = false;
+                Toast.makeText(getContext(), "Tienes que ingresar toda la información", Toast.LENGTH_SHORT).show();
             }
         }
 
         if(bitmap==null){
-            Toast.makeText(getApplicationContext(), "Tienes que ingresar una fotografia", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Tienes que ingresar una fotografia", Toast.LENGTH_SHORT).show();
             validador = false;
         }
 
@@ -293,10 +386,10 @@ public class RegistrarUsuario extends AppCompatActivity {
             try {
                 String NameOfImage = campoId.getText().toString()  + "_" +  campoNombre.getText().toString()  + "_" +  campoGrado.getText().toString()  + "_" +  campoGrupo.getText().toString()+ "_" + generarQR.getCurrentDateAndTime();
                 String NameOfFolder = "/Gastronomia " + "Salon: " +  campoGrado.getText().toString()  + "_" +  campoGrupo.getText().toString();
-                bmap = generarQR.TextToImageEncode(campoId.getText().toString(), this);
-                generarQR.saveImage(bmap, this, NameOfImage, NameOfFolder );  //give read write permission
+                bmap = generarQR.TextToImageEncode(campoId.getText().toString(), getContext());
+                generarQR.saveImage(bmap, getContext(), NameOfImage, NameOfFolder );  //give read write permission
                 //Metodo de la clase enviar EnviarEmail para enviar email
-                mail.enviarImagen(NameOfFolder, NameOfImage, campoEmail.getText().toString(), campoEmail.getText().toString(), this);
+                mail.enviarImagen(NameOfFolder, NameOfImage, campoEmail.getText().toString(), campoEmail.getText().toString(), getContext());
 
             } catch (WriterException e) {
                 e.printStackTrace();
@@ -307,10 +400,8 @@ public class RegistrarUsuario extends AppCompatActivity {
 
     private void cargarWebSevice() {
 
-
-
-        String url = "http://192.168.8.105/DataBase_CheckSafe/CheckSafe_DB_RegistrarUsuario.php?";
-        //url = url.replace(" ", "%20");
+        String ipAddress = VariablesEstaticas.ipAddress;
+        String url = ipAddress+"/DataBase_CheckSafe/CheckSafe_DB_RegistrarUsuario.php?";
 
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
@@ -326,10 +417,10 @@ public class RegistrarUsuario extends AppCompatActivity {
                     campoGrupo.setText("");
                     campoGrado.setText("");
 
-                    Toast.makeText(getApplicationContext(),"Se ha registrado con exito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Se ha registrado con exito", Toast.LENGTH_SHORT).show();
                 }else{
 
-                    Toast.makeText(getApplicationContext(),"No se ha registrado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"No se ha registrado", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -337,7 +428,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getApplicationContext(),"No se ha podido establecer conexión", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"No se ha podido establecer conexión", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -374,8 +465,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             }
 
         };
-        //Toast.makeText(getApplicationContext(), "Sexo:"+campoSexo,Toast.LENGTH_LONG).show();
-        request.add(stringRequest);
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);
     }
 
     private String convertirImgString(Bitmap bitmap){

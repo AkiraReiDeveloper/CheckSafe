@@ -7,7 +7,7 @@
     <string name="btnRegistrarUser">Registrar</string>
     <string name="labSexo">Sexo:</string>
     <string name="txtApellidos">Apellidos</string>
-    <string name="txtNombres">Nombres</string>
+    <string name="txtNombres">Nombre</string>
     <string name="txtGrupo">Grupo</string>
     <string name="txtGrado">Grado</string>
     <string name="txtEmail">Correo Electronico</string>
@@ -20,6 +20,7 @@
     <string name="btnEliminar">Eliminar</string>
     <string name="labUsuario">Usuario</string>
     <string name="txtNoCuenta">No. Cuenta</string>
+    <string name="txtNoIdentificador">No. Identificacion</string>
     <string name="labTitleConsultar">Consultar Usuario</string>
     <string name="btnConsultarUser">Consultar</string>
     <string name="textSexoL">Sexo</string>
@@ -28,4 +29,15 @@
     <string name="imgConsultarUsuarios">img</string>
     <string name="imgAgregarUsuarios">img2</string>
     <string name="btnElegirFoto">Foto</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Selecciona alguna de las opciones</string>
+    <string name="nav_header_subtitle">Escuela de Gastronomia</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">IpAddress</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -21,30 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".UsuariosCRUD"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".RegistrarUsuario"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".Scanner"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity
-            android:name=".ConsultarUsuario"
-            android:screenOrientation="portrait">
-        </activity>
-
         <activity
             android:name=".ListarUsuarios"
-            android:screenOrientation="portrait">
-        </activity>
-<!--Permisos de la camara no esta en uso-
+            android:screenOrientation="portrait"></activity>
+        <!--
+    Permisos de la camara no esta en uso-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.halo.loginui2.vistas.fileprovider"
@@ -53,8 +34,9 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"></meta-data>
-        </provider>﻿-->
-<!--permisos para enviar correo-->
+        </provider>﻿
+        -->
+        <!-- permisos para enviar correo -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.myfileprovider"
@@ -65,8 +47,6 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
-
     </application>
-
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.victorreyes.checksafe;
+package com.example.victorreyes.checksafe.Utilidades;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
